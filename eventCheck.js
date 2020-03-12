@@ -92,8 +92,45 @@ $("#btnAllRule").click(
         return false;
     }
     });
-    funcRule1();
-    $("#labelWarning").text("NG tại rule 1");
+    if(flag==1)
+    {
+        funcRule1();
+        $("#labelWarning").text("NG tại rule 1");
+    }
+
+
+    _outputList=rule2(_inputList,_upper,_lower,_average);
+    $.each(_outputList, function(index, value) {
+        if(value==2)
+        {
+            flag=2;
+            return false;
+        }
+        });
+        if(flag==2)
+        {
+            funcRule2();
+            $("#labelWarning").text("NG tại rule 2");
+        }
+
+        _outputList=rule3(_inputList,_upper,_lower);
+        $.each(_outputList, function(index, value) {
+            if(value==2)
+            {
+                flag=3;
+                return false;
+            }
+            });
+            if(flag==3)
+            {
+                funcRule3();
+                $("#labelWarning").text("NG tại rule 3");
+            }
+            if(flag==0)
+            {
+                $("#labelWarning").text("ok");
+                $("#divResult").hide();
+            }
 })
 
 

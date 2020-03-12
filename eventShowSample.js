@@ -28,3 +28,12 @@ $("#btnSampleRule3").click(
 $('#listInput').click(function () {
     $("#labelSample").empty();
 });
+
+$("#btnSampleOK").click(
+    function()
+    {
+        $("#listInput").val(inputListOK);
+        $("#labelSample").empty();
+        $("#labelSample").append("Sample OK");
+    }
+)
