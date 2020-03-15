@@ -60,23 +60,29 @@ function createOutputList(inputList)
   html+=`<th>List output</th>`;
   $.each(inputList,function(i,value)
   {
-    if(value===1)
-    {
-      html+=`<td class="bg-warning">${value}</td>`
-    }
-    if(value===2)
-    {
-      html+=`<td class="bg-danger">${value}</td>`
-    }
-    if(value===0)
-    {
-      html+=`<td class="bg-primary">${value}</td>`
-    }
+    html+=htmlTd.get(value);
+    html+=value+`</td>`;
+    // if(value===1)
+    // {
+    //   html+=`<td class="bg-warning">${value}</td>`
+    // }
+    // if(value===2)
+    // {
+    //   html+=`<td class="bg-danger">${value}</td>`
+    // }
+    // if(value===0)
+    // {
+    //   html+=`<td class="bg-primary">${value}</td>`
+    // }
   })
   html+=`</tr>`;
   return html;
 }
-
+const htmlTd = new Map([
+  [1,`<td class="bg-warning">`],
+  [2,`<td class="bg-danger">`],
+  [0,`<td class="bg-primary">`],
+])
 function createTableBody(id,inputList,outputList)
 {
   $("#"+id).empty();
@@ -94,12 +100,13 @@ function rule1(inputList,upper,lower)
     var _inputList=[];
     _inputList=inputList.slice();
     $.each(_inputList, function(index, value) {
-        if(value>=upper||value<=lower)
-        {
-            _inputList[index]=2;
-        }
-        else
-        _inputList[index]=0;
+        // if(value>=upper||value<=lower)
+        // {
+        //     _inputList[index]=2;
+        // }
+        // else
+        // _inputList[index]=0;
+        _inputList[index]=(value>=upper||value<=lower)? 2:0
       });
     // for(let i=0;i<_inputList.length;i++)
     // {
@@ -120,6 +127,11 @@ function rule1(inputList,upper,lower)
 ////////////////////////////////////////////////////////////////////////
 var inputList2=[0,2,4,6,28,5,8,9,7,4,-44,-23,-9,-3,-12,-33,-9,-2,1,3];
 
+const outputRule2 = new Map([
+  [8, 1],
+  [9, 2],
+  ['default',0],
+])
 
 function rule2(inputList,upper,lower,average)
 {
@@ -133,36 +145,38 @@ function rule2(inputList,upper,lower,average)
       {
         countMinus=0;
         countPlus++;
-        console.log(countPlus)
-        if(countPlus==8)
-        {
-          _inputList[index]=1;
-        }
-        else if(countPlus==9)
-        {
-          _inputList[index]=2;
-        }
-        else
-        {
-          _inputList[index]=0;
-        }
+        // if(countPlus==8)
+        // {
+        //   _inputList[index]=1;
+        // }
+        // else if(countPlus==9)
+        // {
+        //   _inputList[index]=2;
+        // }
+        // else
+        // {
+        //   _inputList[index]=0;
+        // }
+       _inputList[index] = outputRule2.get(countPlus) || outputRule2.get('default');
       }
       else if(value>lower&&value<average)
       {
         countPlus=0;
         countMinus++;
-        if(countMinus==8)
-        {
-          _inputList[index]=1;
-        }
-        else if(countMinus==9)
-        {
-          _inputList[index]=2;
-        }
-        else
-        {
-          _inputList[index]=0;
-        }
+        // if(countMinus==8)
+        // {
+        //   _inputList[index]=1;
+        // }
+        // else if(countMinus==9)
+        // {
+        //   _inputList[index]=2;
+        // }
+        // else
+        // {
+        //   _inputList[index]=0;
+        // }
+        _inputList[index] = outputRule2.get(countMinus) || outputRule2.get('default');
+
       }
       else if(value==average ||value>=upper||value<=lower)
       {
@@ -177,12 +191,16 @@ function rule2(inputList,upper,lower,average)
 
 var outputList2=rule2(inputList2,upper,lower,average);
 
-createTableBody("table2",inputList2,outputList2);
+//createTableBody("table2",inputList2,outputList2);
 //////////////////////////////////////////////////////////////////
 
-
+const outputRule3 = new Map([
+  [5, 1],
+  [6, 2],
+  ['default',0],
+])
 var inputList3=[49,46,33,21,20,15,8,6,7,8,-44,-23,-9,-3,-1,0,2,3,1,23];
-$("#list3").text(inputList3);
+//$("#list3").text(inputList3);
 
 var rule3=function(inputList,upper,lower)
 {
@@ -196,35 +214,37 @@ var rule3=function(inputList,upper,lower)
         {
           countDecrease=0;
           countIncrease++;
-          if(countIncrease==5)
-          {
-            _inputList[i]=1
-          }
-          else if(countIncrease==6)
-          {
-            _inputList[i]=2
-          }
-          else
-          {
-            _inputList[i]=0 
-          }
+          // if(countIncrease==5)
+          // {
+          //   _inputList[i]=1
+          // }
+          // else if(countIncrease==6)
+          // {
+          //   _inputList[i]=2
+          // }
+          // else
+          // {
+          //   _inputList[i]=0 
+          // }
+          _inputList[i]=outputRule3.get(countIncrease)||outputRule3.get('default')
         }
         else if(inputList[i]<inputList[i-1])
         {
           countIncrease=0;
           countDecrease++;
-          if(countDecrease==5)
-          {
-            _inputList[i]=1
-          }
-          else if(countDecrease==6)
-          {
-            _inputList[i]=2
-          }
-          else
-          {
-            _inputList[i]=0 
-          }
+          // if(countDecrease==5)
+          // {
+          //   _inputList[i]=1
+          // }
+          // else if(countDecrease==6)
+          // {
+          //   _inputList[i]=2
+          // }
+          // else
+          // {
+          //   _inputList[i]=0 
+          // }
+          _inputList[i]=outputRule3.get(countDecrease)||outputRule3.get('default')
         }
         else
         {
@@ -243,3 +263,5 @@ createTableBody("table3",inputList3,outputList3);
 
 
 var inputListOK=[49,46,33,21,20,15,18,6,-7,8,-44,-23,-9,-3,-1,0,-2,3,1,23];
+
+
