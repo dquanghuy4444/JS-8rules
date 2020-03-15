@@ -257,11 +257,11 @@ var rule3=function(inputList,upper,lower)
     return _inputList;
 }
 
-var outputList3=rule3(inputList3,upper,lower);
+// var outputList3=rule3(inputList3,upper,lower);
 
-createTableBody("table3",inputList3,outputList3);
+// createTableBody("table3",inputList3,outputList3);
 
 
-var inputListOK=[49,46,33,21,20,15,18,6,-7,8,-44,-23,-9,-3,-1,0,-2,3,1,23];
+ var inputListOK=[49,46,33,21,20,15,18,6,-7,8,-44,-23,-9,-3,-1,0,-2,3,1,23];
 
 

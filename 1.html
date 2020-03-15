@@ -74,26 +74,18 @@
     <br>
     <h2 id="labelWarning"></h2>
     <div class="divRule" id="divResult">
-
       <h2 class="text-center" id="title"></h2>
       <h5 id="description"> </h5>
-      <div class="info"></div>
-      <!-- <p>Giới hạn trên:  <span class="upper"></span></p>
-      <p>Giới hạn dưới:  <span class="lower"></span></p>
-      <p>Giá trị trung bình:  <span class="average"></span></p> -->
+      <div class="row" style="margin-bottom:10px;">
+        <div class="col-sm-7" style="padding-top: 28px;">
+          <div class="info"></div>
+        </div>
+        <div class="col-sm-5">
+          <img id="imgRule" src="" width="70%">
+        </div>
+        </div>
       <p class="pSolution" id="solution"></p>
       <table id="table" class="table table-bordered">
-        <!-- <tbody id="tbody1"> -->
-          <!-- <tr id="STT">
-            <th>STT</th>
-          </tr>
-          <tr id="listInput">
-            <th>Mảng nhập</th>
-          </tr>
-          <tr id="listOutput">
-            <th>Mảng xuất</th> 
-                   </tr> -->   
-        <!-- </tbody> -->
       </table>
     </div>
 
@@ -105,12 +97,21 @@
       <p class="pSolution">Cách làm:Tạo 2 count âm và dương.nếu giá trị  trong khoảng từ lower->average, count âm tăng 1 đơn vị .Giá trị tiếp theo nằm trong khoảng average->upper,count âm=0,count dương tăng 1 đơn vị.Ngược lại cũng như thế.Nêu count nào có giá trị =8,giá trị trong list trả về bằng 1, count =9,giá trị bằng 2, count giá trị khác thì giá trị trong list=0.Trường hợp giá trị =0,count âm và dương đều =0. </p>
       <table id="table2" class="table table-bordered">
       </table>
-    </div>
+    </div>-->
 
-    <div class="divRule">
+    <!-- <div class="divRule">
       <h2 class="text-center">Rule 3</h2>
       <h5>Rule 3: Có 6 giá trị hoặc nhiều hơn liên tiếp nhau đang có xu hướng tăng hoặc giảm</h5>
-      <div class="info"></div>
+      <div class="row" style="margin-bottom:10px;">
+        <div class="col-sm-7" style="padding-top: 20px;">
+          <div class="info"></div>
+        </div>
+        <div class="col-sm-5">
+          <img src="image\Rule5.png" width="60%">
+        </div>
+      </div>
+
+
       <p class="pSolution">Cách làm:Tạo 2 count âm và dương.nếu giá trị  trong khoảng từ lower->average, count âm tăng 1 đơn vị .Giá trị tiếp theo nằm trong khoảng average->upper,count âm=0,count dương tăng 1 đơn vị.Ngược lại cũng như thế.Nêu count nào có giá trị =8,giá trị trong list trả về bằng 1, count =9,giá trị bằng 2, count giá trị khác thì giá trị trong list=0.Trường hợp giá trị =0,count âm và dương đều =0. </p>
       <table id="table3" class="table table-bordered">
       </table>
@@ -119,7 +120,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="ifElse.js" type="text/javascript"></script>
+
 <script src="script.js" type="text/javascript"></script>
 <script src="eventCheck.js" type="text/javascript"></script>
 <script src="eventShowSample.js" type="text/javascript"></script>

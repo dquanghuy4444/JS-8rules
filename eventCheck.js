@@ -33,7 +33,7 @@ var htmlDescription=`Rule 1:Giá trị trong list nằm ngoài khoảng (<span c
 var htmlSolution=`Cách làm:Check từng phần tử , giá trị lớn hơn hoặc bằng giới hạn hoặc ,giá trị bé hơn hoặc bằng giới hạn dưới thì cho bằng 0`;
     createInfoArea(_upper,_lower,_average,htmlTitle,htmlDescription,htmlSolution);
   createTableBody("table",_inputList,_outputList);
-  $("#divResult").show();
+  $("#divResult").css("display", "block");
   $("#labelWarning").empty();
 }
 /////////////////////////////////////////////////
@@ -52,7 +52,7 @@ function funcRule2()
     var htmlSolution=`Cách làm:Tạo 2 count âm và dương.nếu giá trị  trong khoảng từ lower->average, count âm tăng 1 đơn vị .Giá trị tiếp theo nằm trong khoảng average->upper,count âm=0,count dương tăng 1 đơn vị.Ngược lại cũng như thế.Nêu count nào có giá trị =8,giá trị trong list trả về bằng 1, count =9,giá trị bằng 2, count giá trị khác thì giá trị trong list=0.Trường hợp giá trị =0,count âm và dương đều =0. `;
         createInfoArea(_upper,_lower,_average,htmlTitle,htmlDescription,htmlSolution);
         createTableBody("table",_inputList,_outputList);
-        $("#divResult").show();
+        $("#divResult").css("display", "block");
         $("#labelWarning").empty();
 }
 
@@ -66,6 +66,7 @@ $("#btnRule3").click(
   funcRule3();
 })
 
+
 function funcRule3()
 {
     var htmlTitle="Rule 3";
@@ -73,7 +74,7 @@ function funcRule3()
     var htmlSolution=`Cách làm:Lấy giá trị hiện tại và giá trị tiếp theo so sánh với nhau.Nếu bé hơn thì biến countIncrease tăng.Cứ so sánh từng cặp như thế. Nếu 1 cặp ngược xu hướng tăng lên thì biến countIncrease=0, biếng countDerease tăng.Ngược lại cũng như thế `;
         createInfoArea(_upper,_lower,_average,htmlTitle,htmlDescription,htmlSolution);
         createTableBody("table",_inputList,_outputList);
-        $("#divResult").show();
+        $("#divResult").css("display", "block");
         $("#labelWarning").empty();
 }
 //////////////////////////////
@@ -129,7 +130,7 @@ $("#btnAllRule").click(
             if(flag==0)
             {
                 $("#labelWarning").text("ok");
-                $("#divResult").hide();
+                $("#divResult").css("display", "none");
             }
 })
 
