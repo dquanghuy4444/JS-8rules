@@ -26,6 +26,11 @@ $(".lower").text(lower);
 $(".average").text(average);
 $("#title").append(htmlTitle);
 
+var standardDeviation=Math.ceil(Math.abs(upper-lower)/6);
+$(".upperLevel1").text(average+standardDeviation);
+$(".lowerLevel1").text(average-standardDeviation);
+$(".upperLevel2").text(average+2*standardDeviation);
+$(".lowerLevel2").text(average-2*standardDeviation);
 }
 function createSTT(inputList)
 {
@@ -98,25 +103,24 @@ function createTableBody(id,inputList,outputList)
 function rule1(inputList,upper,lower)
 {
     var _inputList=[];
+    var indexTemp=-1;
     _inputList=inputList.slice();
     $.each(_inputList, function(index, value) {
-        // if(value>=upper||value<=lower)
-        // {
-        //     _inputList[index]=2;
-        // }
-        // else
-        // _inputList[index]=0;
-        _inputList[index]=(value>=upper||value<=lower)? 2:0
+        //_inputList[index]=(value>=upper||value<=lower)? 2:0
+        if(value>=upper||value<=lower)
+        {
+          indexTemp=index;
+          return false;
+        }
       });
-    // for(let i=0;i<_inputList.length;i++)
-    // {
-    //     if(_inputList[i]>upper||_inputList[i]<lower)
-    //     {
-    //         _inputList[i]=2;
-    //     }
-    //     else
-    //     _inputList[i]=0;
-    // }
+      $.each(_inputList, function(index, value) {
+        _inputList[index]=0;
+        if(index==indexTemp)
+        {
+          _inputList[index]=2; 
+        }
+
+      });
     return _inputList;
 }
 
@@ -127,66 +131,62 @@ function rule1(inputList,upper,lower)
 ////////////////////////////////////////////////////////////////////////
 var inputList2=[0,2,4,6,28,5,8,9,7,4,-44,-23,-9,-3,-12,-33,-9,-2,1,3];
 
-const outputRule2 = new Map([
-  [8, 1],
-  [9, 2],
-  ['default',0],
-])
 
+
+//Rule2
 function rule2(inputList,upper,lower,average)
 {
     var countMinus=0;
     var countPlus=0;
-    var _inputList=[];
-    _inputList=inputList.slice();
-
-    $.each(_inputList, function(index, value) {
-      if(value>average&&value<upper)
+    var listTemp=[];
+    var index=-1;
+    listTemp=inputList.slice();
+    for(let i=0;i<listTemp.length;i++)
+    {
+      if(listTemp[i]>average&&listTemp[i]<upper)
       {
         countMinus=0;
         countPlus++;
-        // if(countPlus==8)
-        // {
-        //   _inputList[index]=1;
-        // }
-        // else if(countPlus==9)
-        // {
-        //   _inputList[index]=2;
-        // }
-        // else
-        // {
-        //   _inputList[index]=0;
-        // }
-       _inputList[index] = outputRule2.get(countPlus) || outputRule2.get('default');
       }
-      else if(value>lower&&value<average)
+      else if(listTemp[i]>lower&&listTemp[i]<average)
       {
         countPlus=0;
         countMinus++;
-        // if(countMinus==8)
-        // {
-        //   _inputList[index]=1;
-        // }
-        // else if(countMinus==9)
-        // {
-        //   _inputList[index]=2;
-        // }
-        // else
-        // {
-        //   _inputList[index]=0;
-        // }
-        _inputList[index] = outputRule2.get(countMinus) || outputRule2.get('default');
-
       }
-      else if(value==average ||value>=upper||value<=lower)
+      if(countMinus==9||countPlus==9)
       {
-        countMinus=0;
-        countPlus=0;
-        _inputList[index]=0;
-      }
-    });
+        index=i;
+        break;
+      }     
+    }
+    for(let i=0;i<listTemp.length;i++)
+    {
+      listTemp[i]=getValueByIndex(i,index);
 
-    return _inputList;
+    }
+    // $.each(_inputList, function(index, value) {
+    //   if(value>average&&value<upper)
+    //   {
+    //     countMinus=0;
+    //     countPlus++;
+    //    _inputList[index] = outputRule2.get(countPlus) || outputRule2.get('default');
+    //   }
+    //   else if(value>lower&&value<average)
+    //   {
+    //     countPlus=0;
+    //     countMinus++;
+    //     _inputList[index] = outputRule2.get(countMinus) || outputRule2.get('default');
+
+    //   }
+    //   else if(value==average ||value>=upper||value<=lower)
+    //   {
+    //     countMinus=0;
+    //     countPlus=0;
+    //     _inputList[index]=0;
+    //   }
+    // });
+
+    return listTemp;
 }
 
 var outputList2=rule2(inputList2,upper,lower,average);
@@ -194,67 +194,47 @@ var outputList2=rule2(inputList2,upper,lower,average);
 //createTableBody("table2",inputList2,outputList2);
 //////////////////////////////////////////////////////////////////
 
-const outputRule3 = new Map([
-  [5, 1],
-  [6, 2],
-  ['default',0],
-])
 var inputList3=[49,46,33,21,20,15,8,6,7,8,-44,-23,-9,-3,-1,0,2,3,1,23];
-//$("#list3").text(inputList3);
 
+
+//Rule3
 var rule3=function(inputList,upper,lower)
 {
     var countIncrease=0;
     var countDecrease=0;
-    var _inputList=inputList.slice();
+    var index=-1;
+    var listTemp=inputList.slice();
 
-    for(let i=0;i<_inputList.length;i++)
+    for(let i=0;i<listTemp.length-1;i++)
     {
-        if(inputList[i]>inputList[i-1])
+        if(listTemp[i]>listTemp[i+1])
         {
           countDecrease=0;
           countIncrease++;
-          // if(countIncrease==5)
-          // {
-          //   _inputList[i]=1
-          // }
-          // else if(countIncrease==6)
-          // {
-          //   _inputList[i]=2
-          // }
-          // else
-          // {
-          //   _inputList[i]=0 
-          // }
-          _inputList[i]=outputRule3.get(countIncrease)||outputRule3.get('default')
         }
-        else if(inputList[i]<inputList[i-1])
+        else if(listTemp[i]<listTemp[i+1])
         {
           countIncrease=0;
           countDecrease++;
-          // if(countDecrease==5)
-          // {
-          //   _inputList[i]=1
-          // }
-          // else if(countDecrease==6)
-          // {
-          //   _inputList[i]=2
-          // }
-          // else
-          // {
-          //   _inputList[i]=0 
-          // }
-          _inputList[i]=outputRule3.get(countDecrease)||outputRule3.get('default')
         }
         else
         {
           countDecrease=0;
           countIncrease=0;
-          _inputList[i]=0;
+        }
+        if(countDecrease==6||countIncrease==6)
+        {
+          index=i+1;
+          break;
         }
     }
+    for(let i=0;i<listTemp.length;i++)
+    {
+      listTemp[i]=getValueByIndex(i,index);
 
-    return _inputList;
+    }
+
+    return listTemp;
 }
 
 // var outputList3=rule3(inputList3,upper,lower);
@@ -263,5 +243,353 @@ var rule3=function(inputList,upper,lower)
 
 
  var inputListOK=[49,46,33,21,20,15,18,6,-7,8,-44,-23,-9,-3,-1,0,-2,3,1,23];
+
+ ////////////////////////////////////////////////////////
+ var inputList4=[22,-33,-33,-16,-20,25,-18,6,-20,8,2,13,9,13,5,8,2,-5,12,22];
+
+ //Rule4
+ function rule4(inputList)
+ {
+  var listTemp=[];
+  
+
+
+  ///////////////////////////////
+//    var flag=0;
+//    var flagNG=0;
+//   var status=0;
+//   for(let i=0;i<7;i++)
+//   {
+//     var countIncrease=0;
+//     var countDecrease=0;
+//     var condition=0;
+//     listTemp=inputList.slice();
+//     for(let j=0;j<13;j++)
+//     {
+//       if(listTemp[i+j]==listTemp[i+j+1])
+//       {
+//         flag=0;
+//         break;
+//       }
+//       else if(listTemp[i+j]>listTemp[i+j+1])
+//       {
+//         countDecrease++;
+//         if(j==0)
+//         status=-1;
+//       }
+//       else if(listTemp[i+j]<listTemp[i+j+1])
+//       {
+//         countIncrease++;
+//         if(j==0)
+//         status=1;
+
+//       }
+//       condition=countIncrease-countDecrease;
+//       if(condition!=status&& condition!=0)
+//       {
+//         flag=0;
+//         break;
+//       }
+//       else if(condition==0||Math.abs(condition)==1)
+//       {
+//         flag=1;
+//         listTemp[i+j]=0;
+//         if((countDecrease==7 && countIncrease==6)||(countIncrease==7&& countDecrease==6))
+//         {
+//           listTemp[i+j]=1;
+//           for(let n=1;n<8-i;n++)
+//           {
+//             if(n==1)
+//             {
+//               listTemp[i+j+n]=2;
+//               flagNG=1;
+//             }
+
+//             else
+//             listTemp[i+j+n]=0;
+//           }
+//         }
+//       }
+//       else
+//       {
+//         flag=0;
+//         break;
+//       }
+//     }
+//     if(flagNG==1)
+//     break;
+//   }
+//   if(flag==0)
+//   {
+//     listTemp=inputList.slice();
+//     $.each(listTemp, function(index, value) {
+//       listTemp[index]=0;
+//     });
+//   }
+// for(let i=0;i<7;i++)
+// {
+//   listTemp[i]=0;
+// }
+  return listTemp;
+ }
+
+ /////////////////////////////////////////////////////////////////////////////////
+
+ var inputList5=[8,2,45,40,7,18,-12,-26,-33,20,-21,22,26,-22,18,2,13,-9,13,5];
+ //Rule5
+ function  rule5(inputList,upper,lower,average)
+{
+  var countPlus=0;
+  var countMinus=0;
+  var listTemp=[];
+  var index=-1;
+  listTemp=inputList.slice();
+  var standardDeviation=(upper-average)/3;
+  var above2=average+2*standardDeviation;
+  var below2=average- 2*standardDeviation;
+  for(let i=0;i<listTemp.length;i++)
+  {
+
+    if(listTemp[i]>above2&&listTemp[i]<upper)
+    {
+      countPlus++;
+      countMinus=0;
+    }
+    else if(listTemp[i]<below2&&listTemp[i]>lower)
+    {
+      countMinus++;
+      countPlus=0;
+    }
+    else
+    {
+      countMinus=0;
+      countPlus=0;
+    }
+    if(countMinus==2||countPlus==2)
+    {
+      index=i;
+      break;
+
+    }
+  }
+
+  for(let i=0;i<listTemp.length;i++)
+  {
+    listTemp[i]=getValueByIndex(i,index);
+  }
+  
+    return listTemp;
+}
+
+ /////////////////////////////////////////////////////////////////////////////
+ var inputList6=[22,-33,-33,16,20,25,18,26,-20,8,2,13,-9,13,5,8,2,5,-12,22];
+
+ //Rule6
+ function rule6(inputList,upper,lower,average)
+ {
+   var countPlus=0;
+   var countMinus=0;
+   var listTemp=[];
+   var index=-1;
+   listTemp=inputList.slice();
+   var standardDeviation=(upper-average)/3;
+   var above=average+standardDeviation;
+   var below=average- standardDeviation;
+   for(let i=0;i<listTemp.length;i++)
+   {
+     if(listTemp[i]>above&& listTemp[i]<upper)
+     {
+       countPlus++;
+       countMinus=0;
+     }
+     else if(listTemp[i]>lower&& listTemp[i]<below)
+     {
+      countMinus++;
+       countPlus=0;
+     }
+     else{
+       countMinus=0;
+       countPlus=0;
+     }
+     if(countMinus==4||countPlus==4)
+     {
+       index=i;
+       break;
+     }
+   }
+  //  for (let i=0;i<listTemp.length-4;i++)
+  //  {
+  //   var countPlus=0;
+  //   var countMinus=0;
+  //    for(let j=0;j<5;j++)
+  //    {
+  //      valueTemp=listTemp[i+j]
+  //      if(valueTemp>average && valueTemp<upper)
+  //      {
+  //        countPlus++;
+  //        countMinus=0;
+  //      }
+  //      else if(valueTemp>lower && valueTemp<average)
+  //      {
+  //        countMinus++;
+  //        countPlus=0;
+  //      }
+  //      if(valueTemp==lower||valueTemp==average||valueTemp==upper||(countMinus>0&&countPlus>0))
+  //      {
+  //        break;
+  //      }
+  //      if(countMinus==4||countPlus==4)
+  //      {
+  //        index=i+j;
+  //        break;
+  //      }      
+  //    }
+  //    if(index!=-1)
+  //    {
+  //      break;
+  //    }
+  //  }
+
+   for(let i=0;i<listTemp.length;i++)
+{
+  listTemp[i]=getValueByIndex(i,index);
+}
+
+  return listTemp;
+ }
+
+ ///////////////////////////////////////////////////////////////
+ var inputList7=[18,-12,-6,10,20,-2,-12,6,-2,8,2,13,-9,13,5,8,2,5,-12,7];
+ //Rule7
+ function rule7(inputList,upper,lower,average)
+{
+  var listTemp=[];
+  var index=-1;
+  var countMinus=0;
+  var countPlus=0;
+  listTemp=inputList.slice();
+  var standardDeviation=(upper-average)/3;
+  var above=average+standardDeviation;
+  var below=average- standardDeviation;
+  for(let i=0;i<listTemp.length;i++)
+  {
+    if(listTemp[i]>below&&listTemp[i]<average)
+    {
+      countMinus++;
+    }
+    else if(listTemp[i]>average&&listTemp[i]<above)
+    {
+      countPlus++;
+    }
+    else
+    {
+      countMinus=0;
+      countPlus=0;
+    }
+    if(countMinus>0&&countPlus>0&&(countMinus+countPlus==15))
+    {
+      index=i;
+      break;
+    }
+  }
+  // for(let i=0;i<6;i++)
+  // {
+  //   var count=0;
+  //   for(let j=0;j<15;j++)
+  //   {
+  //     if(listTemp[i+j]>below&&listTemp[i+j]<above)
+  //     {
+  //       count++;
+  //     }
+  //     else break;
+  //   }
+  //   if(count==15)
+  //   {
+  //     index=i+14;
+  //     break;
+  //   }
+  // }
+
+  for(let i=0;i<listTemp.length;i++)
+  {
+    listTemp[i]=getValueByIndex(i,index);
+  }
+  
+    return listTemp;
+}
+
+ ///////////////////////////////////////////////////////////////
+ var inputList8=[8,2,5,-12,7,18,-26,-12,-33,20,-21,22,26,-22,18,22,13,-9,13,5];
+ //Rule8
+ function  rule8(inputList,upper,lower,average)
+{
+  var listTemp=[];
+  var index=-1;
+  var countMinus=0;
+  var countPlus=0;
+  listTemp=inputList.slice();
+  var standardDeviation=(upper-average)/3;
+  var above=average+standardDeviation;
+  var below=average- standardDeviation;
+  for(let i=0;i<listTemp.length;i++)
+  {
+        if(listTemp[i]<=below)
+        {
+          countMinus++;
+        }
+        else if(listTemp[i]>=above)
+        {
+          countPlus++;
+        }
+        else
+        {
+          countMinus=0;
+          countPlus=0;
+        }
+        if(countMinus>0&&countPlus>0&&(countMinus+countPlus==8))
+        {
+          index=i;
+          break;
+        }
+  }
+  // for(let i=0;i<13;i++)
+  // {
+  //   var count=0;
+  //   for(let j=0;j<8;j++)
+  //   {
+  //     if(listTemp[i+j]<=below||listTemp[i+j]>=above)
+  //     {
+  //       count++;
+  //     }
+  //     else break;
+  //   }
+  //   if(count==8)
+  //   {
+  //     index=i+7;
+  //     break;
+  //   }
+  // }
+
+  for(let i=0;i<listTemp.length;i++)
+  {
+    listTemp[i]=getValueByIndex(i,index);
+  }
+  
+    return listTemp;
+}
+
+ ///////////////////////////////////////////////////////////////
+
+
+
+
+function getValueByIndex(i,index)
+{
+  var value=0;
+  if(i==(index-1))value=1;
+  else if(i==index)value=2;
+  return value
+}
+
 
 

@@ -25,6 +25,51 @@ $("#btnSampleRule3").click(
     }
 )
 
+$("#btnSampleRule4").click(
+    function()
+    {
+        $("#listInput").val(inputList4);
+        $("#labelSample").empty();
+        $("#labelSample").append("Sample for rule 4");
+    }
+)
+
+$("#btnSampleRule5").click(
+    function()
+    {
+        $("#listInput").val(inputList5);
+        $("#labelSample").empty();
+        $("#labelSample").append("Sample for rule 5");
+    }
+)
+
+$("#btnSampleRule6").click(
+    function()
+    {
+        $("#listInput").val(inputList6);
+        $("#labelSample").empty();
+        $("#labelSample").append("Sample for rule 6");
+    }
+)
+
+$("#btnSampleRule7").click(
+    function()
+    {
+        $("#listInput").val(inputList7);
+        $("#labelSample").empty();
+        $("#labelSample").append("Sample for rule 7");
+    }
+)
+
+$("#btnSampleRule8").click(
+    function()
+    {
+        $("#listInput").val(inputList8);
+        $("#labelSample").empty();
+        $("#labelSample").append("Sample for rule 8");
+    }
+)
+
 $('#listInput').click(function () {
     $("#labelSample").empty();
 });
