@@ -255,81 +255,81 @@ var rule3=function(inputList,upper,lower)
 
 
   ///////////////////////////////
-//    var flag=0;
-//    var flagNG=0;
-//   var status=0;
-//   for(let i=0;i<7;i++)
-//   {
-//     var countIncrease=0;
-//     var countDecrease=0;
-//     var condition=0;
-//     listTemp=inputList.slice();
-//     for(let j=0;j<13;j++)
-//     {
-//       if(listTemp[i+j]==listTemp[i+j+1])
-//       {
-//         flag=0;
-//         break;
-//       }
-//       else if(listTemp[i+j]>listTemp[i+j+1])
-//       {
-//         countDecrease++;
-//         if(j==0)
-//         status=-1;
-//       }
-//       else if(listTemp[i+j]<listTemp[i+j+1])
-//       {
-//         countIncrease++;
-//         if(j==0)
-//         status=1;
+   var flag=0;
+   var flagNG=0;
+  var status=0;
+  for(let i=0;i<7;i++)
+  {
+    var countIncrease=0;
+    var countDecrease=0;
+    var condition=0;
+    listTemp=inputList.slice();
+    for(let j=0;j<13;j++)
+    {
+      if(listTemp[i+j]==listTemp[i+j+1])
+      {
+        flag=0;
+        break;
+      }
+      else if(listTemp[i+j]>listTemp[i+j+1])
+      {
+        countDecrease++;
+        if(j==0)
+        status=-1;
+      }
+      else if(listTemp[i+j]<listTemp[i+j+1])
+      {
+        countIncrease++;
+        if(j==0)
+        status=1;
 
-//       }
-//       condition=countIncrease-countDecrease;
-//       if(condition!=status&& condition!=0)
-//       {
-//         flag=0;
-//         break;
-//       }
-//       else if(condition==0||Math.abs(condition)==1)
-//       {
-//         flag=1;
-//         listTemp[i+j]=0;
-//         if((countDecrease==7 && countIncrease==6)||(countIncrease==7&& countDecrease==6))
-//         {
-//           listTemp[i+j]=1;
-//           for(let n=1;n<8-i;n++)
-//           {
-//             if(n==1)
-//             {
-//               listTemp[i+j+n]=2;
-//               flagNG=1;
-//             }
+      }
+      condition=countIncrease-countDecrease;
+      if(condition!=status&& condition!=0)
+      {
+        flag=0;
+        break;
+      }
+      else if(condition==0||Math.abs(condition)==1)
+      {
+        flag=1;
+        listTemp[i+j]=0;
+        if((countDecrease==7 && countIncrease==6)||(countIncrease==7&& countDecrease==6))
+        {
+          listTemp[i+j]=1;
+          for(let n=1;n<8-i;n++)
+          {
+            if(n==1)
+            {
+              listTemp[i+j+n]=2;
+              flagNG=1;
+            }
 
-//             else
-//             listTemp[i+j+n]=0;
-//           }
-//         }
-//       }
-//       else
-//       {
-//         flag=0;
-//         break;
-//       }
-//     }
-//     if(flagNG==1)
-//     break;
-//   }
-//   if(flag==0)
-//   {
-//     listTemp=inputList.slice();
-//     $.each(listTemp, function(index, value) {
-//       listTemp[index]=0;
-//     });
-//   }
-// for(let i=0;i<7;i++)
-// {
-//   listTemp[i]=0;
-// }
+            else
+            listTemp[i+j+n]=0;
+          }
+        }
+      }
+      else
+      {
+        flag=0;
+        break;
+      }
+    }
+    if(flagNG==1)
+    break;
+  }
+  if(flag==0)
+  {
+    listTemp=inputList.slice();
+    $.each(listTemp, function(index, value) {
+      listTemp[index]=0;
+    });
+  }
+for(let i=0;i<7;i++)
+{
+  listTemp[i]=0;
+}
   return listTemp;
  }
 
@@ -590,6 +590,44 @@ function getValueByIndex(i,index)
   else if(i==index)value=2;
   return value
 }
+
+// var strPerfectTime="0-15;1-21;2-27;3-33;4-39;5-45;6-51;7-57;8-63;9-69;10-75";
+// var listPerfectTimeTemp = strPerfectTime.split(";");
+// console.log(listPerfectTimeTemp);
+
+// function getListFailTime(_listPerfectTimeTemp)
+// {
+//   var listFailTime='';
+//   for(let i=0;i<_listPerfectTimeTemp.length;i++)
+//   {
+//     var item=_listPerfectTimeTemp[i];
+//     var listTemp = item.split("-");
+//     if(i===0)
+//     {
+//       listFailTime=listTemp[0];
+//     }
+//     else listFailTime+=","+listTemp[0];
+//   }
+//   return listFailTime;
+// }
+
+// function getListPerfectTime(_listPerfectTimeTemp)
+// {
+//   var listPerfectTime=[];
+//   for(let i=0;i<_listPerfectTimeTemp.length;i++)
+//   {
+//     var item=_listPerfectTimeTemp[i];
+//     var listTemp = item.split("-");
+//     listPerfectTime.push(listTemp[1]);
+
+//   }
+//   return listPerfectTime;
+// }
+
+// var listFailTime=getListFailTime(listPerfectTimeTemp);
+// console.log(listFailTime)
+// var listPerfectTime=getListPerfectTime(listPerfectTimeTemp);
+// console.log(listPerfectTime)
 
 
 

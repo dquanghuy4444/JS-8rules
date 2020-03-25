@@ -5,6 +5,7 @@ var _inputListTemp;
 var _inputList;
 var _outputList;
 let action;
+var flag;
 function getValueInTextBox()
 {
     _upper=parseInt($("#upperInput").val());
@@ -12,6 +13,24 @@ function getValueInTextBox()
     _average=(_upper+_lower)/2;
     _inputListTemp=$("#listInput").val();
     _inputList = Array.from(_inputListTemp.split(','),Number);
+}
+
+function addEffect(_outputList)
+{
+    $.each(_outputList,function(i,value)
+    {
+    if(value===2)
+    {
+        //flag=0;
+        addWarning();
+        return false;
+    }
+    else
+    {
+    
+        $('body').removeClass("warning");
+    }
+    });
 }
 
 /////////////////////////
@@ -28,10 +47,13 @@ $("#btnRule1").click(
     getValueInTextBox();
     _outputList=rule1(_inputList,_upper,_lower);
     funcRule1();
+
 })
+
 
 function funcRule1()
 {
+    addEffect(_outputList);
     var htmlTitle="Rule 1";
 var htmlDescription=`Rule 1: Giá trị trong list nằm ngoài khoảng (<span class="lower"></span>, <span class="upper"></span>).`;
 var htmlSolution=`Cách làm:`;
@@ -48,11 +70,13 @@ $("#btnRule2").click(
 {
     getValueInTextBox();
   _outputList=rule2(_inputList,_upper,_lower,_average);
+  addEffect(_outputList);
   funcRule2();
 })
 
 function funcRule2()
 {
+    addEffect(_outputList);
     var htmlTitle="Rule 2";
     var htmlDescription=`Rule 2: Có 9 giá trị hoặc nhiều hơn liên tiếp nhau nằm cùng  khoảng từ (<span class="average"></span>, <span class="upper"></span>) hoặc (<span class="lower"></span>, <span class="average"></span>).`;
     var htmlSolution=`Cách làm:`;
@@ -76,12 +100,14 @@ $("#btnRule3").click(
 {
     getValueInTextBox();
   _outputList=rule3(_inputList,_upper,_lower);
+  addEffect(_outputList);
   funcRule3();
 })
 
 
 function funcRule3()
 {
+    addEffect(_outputList);
     var htmlTitle="Rule 3";
     var htmlDescription=`Rule 3: Có 6 giá trị hoặc nhiều hơn liên tiếp nhau đang có xu hướng tăng hoặc giảm`;
     var htmlSolution=`Cách làm:`;
@@ -105,12 +131,14 @@ $("#btnRule4").click(
 {
     getValueInTextBox();
   _outputList=rule4(_inputList);
+  addEffect(_outputList);
   funcRule4();
 })
 
 
 function funcRule4()
 {
+    addEffect(_outputList);
     var htmlTitle="Rule 4";
     var htmlDescription=`Rule 4: Có 14 giá hoặc nhiều hơn có xu hướng tăng , giảm liên tục và ngược lại`;
     var htmlSolution=`Cách làm:...`;
@@ -128,12 +156,14 @@ $("#btnRule5").click(
 {
     getValueInTextBox();
   _outputList=rule5(_inputList,_upper,_lower,_average);
+  addEffect(_outputList);
   funcRule5();
 })
 
 
 function funcRule5()
 {
+    addEffect(_outputList);
     var htmlTitle="Rule 5";
     var htmlDescription=`Rule 5: Có 2 giá trị liên tiếp ở cùng 1 phía nằm trong  mức 3 (<span class="upperLevel2"></span>, <span class="upper"></span>) của khoảng (<span class="average"></span>, <span class="upper"></span>) hoặc mức 3 (<span class="lower"></span>, <span class="lowerLevel2"></span>) của khoảng (<span class="lower"></span>, <span class="average"></span>).`;
     var htmlSolution=`Cách làm:`;
@@ -160,12 +190,14 @@ $("#btnRule6").click(
 {
     getValueInTextBox();
   _outputList=rule6(_inputList,_upper,_lower,_average);
+  addEffect(_outputList);
   funcRule6();
 })
 
 
 function funcRule6()
 {
+    addEffect(_outputList);
     var htmlTitle="Rule 6";
     var htmlDescription=`Rule 6: Có 4 giá trị liên tiếp ở cùng 1 phía không nằm trong mức 1 (<span class="average"></span>, <span class="upperLevel1"></span>) của khoảng (<span class="average"></span>, <span class="upper"></span>) hoặc mức 1 (<span class="lowerLevel1"></span>, <span class="average"></span>) của khoảng (<span class="lower"></span>, <span class="average"></span>) `;
     var htmlSolution=`Cách làm:`;
@@ -193,12 +225,14 @@ $("#btnRule7").click(
 {
     getValueInTextBox();
   _outputList=rule7(_inputList,_upper,_lower,_average);
+  addEffect(_outputList);
   funcRule7();
 })
 
 
 function funcRule7()
 {
+    addEffect(_outputList);
     var htmlTitle="Rule 7";
     var htmlDescription=`Rule 7: Có 15 giá trị liên tiếp ở cả 2 phía nằm trong mức 1 (<span class="average"></span>, <span class="upperLevel1"></span>) của khoảng (<span class="average"></span>, <span class="upper"></span>) và mức 1 (<span class="lowerLevel1"></span>, <span class="average"></span>) của khoảng (<span class="lower"></span>, <span class="average"></span>) `;
     var htmlSolution=`Cách làm:`;
@@ -227,12 +261,14 @@ $("#btnRule8").click(
 {
     getValueInTextBox();
   _outputList=rule8(_inputList,_upper,_lower,_average);
+  addEffect(_outputList);
   funcRule8();
 })
 
 
 function funcRule8()
 {
+    addEffect(_outputList);
     var htmlTitle="Rule 8";
     var htmlDescription=`Rule 8: Có 8 giá trị liên tiếp  ở cả 2 phía không nằm trong mức 1 (<span class="average"></span>, <span class="upperLevel1"></span>) của khoảng (<span class="average"></span>, <span class="upper"></span>) và mức 1 (<span class="lowerLevel1"></span>, <span class="average"></span>) của khoảng (<span class="lower"></span>, <span class="average"></span>) `;
     var htmlSolution=`Cách làm:`;
@@ -379,6 +415,35 @@ const flagCondition = new Map([
     [7,()=>{funcRule7();$("#labelWarning").text("NG tại rule 7");}],
     [8,()=>{funcRule8();$("#labelWarning").text("NG tại rule 8");}],
   ])
+
+
+
+  function addWarning()
+  {
+    $('body').addClass("warning");
+    $('#sound').get(0).play();
+    setInterVal();
+    setTimeout(function()
+    {
+        $('body').removeClass("warning");
+        setInterVal();
+
+    },6000);
+  }
+
+  function setInterVal()
+  {
+    var trigger = setInterval(function() { 
+        if (!$('body').hasClass('warning')) {
+            clearInterval(trigger)
+        }
+         else {
+            $('#sound').get(0).play();
+        }
+      }, 2000);
+  }
+
+
 
 
 

@@ -12,94 +12,129 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
+      body
+      {
+        min-height: 100vh;
+      }
       .divRule{
         border: 1px solid blueviolet;
         margin: 15px;
         padding: 10px;
+        background-color:white;
       }
       .pSolution
       {
         font-size: 20px;
         background-color:rgb(170, 170, 105);
       }
+      .warning
+      {
+        /* background-color: yellow; */
+        /* position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0; */
+   /* width: 100%;
+    height: 100%;
+    z-index: 10000; */
+   animation-name: changeColor;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+      }
+      
+      @keyframes changeColor {
+  0%   {background-color:yellow;}
+  10%  {background-color:red;}
+  30%  {background-color:yellow;}
+  50%   {background-color:red;}
+  100%  {background-color:yellow;}
+}
     </style>
   </head>
   <body>
-    <div class="divRule">
-      <div class="form-group row">
-        <label for="example-text-input" class="col-2 col-form-label"></label>
-        <div class="col-10">
-          <label for="example-text-input" id="labelSample" class="col-form-label"></label>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="example-text-input" class="col-2 col-form-label">List input</label>
-        <div class="col-10">
-          <input class="form-control" type="text" value="" id="listInput">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="example-number-input" class="col-2 col-form-label">Upper</label>
-        <div class="col-10">
-          <input class="form-control" type="number" value="" id="upperInput">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="example-number-input" class="col-2 col-form-label">Lower</label>
-        <div class="col-10">
-          <input class="form-control" type="number" value="" id="lowerInput">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="example-number-input" class="col-2 col-form-label">Sample list input</label>
-        <div class="col-10">
-          <button class="btn btn-outline-primary active" id="btnSampleRule1" type="button">Rule 1</button>
-          <button class="btn btn-outline-primary" id="btnSampleRule2">Rule 2</button>
-          <button class="btn btn-outline-primary" id="btnSampleRule3">Rule 3</button>
-          <button class="btn btn-outline-primary" id="btnSampleRule4">Rule 4</button>
-          <button class="btn btn-outline-primary" id="btnSampleRule5">Rule 5</button>
-          <button class="btn btn-outline-primary" id="btnSampleRule6">Rule 6</button>
-          <button class="btn btn-outline-primary" id="btnSampleRule7">Rule 7</button>
-          <button class="btn btn-outline-primary" id="btnSampleRule8">Rule 8</button>
-          <button class="btn btn-outline-primary" id="btnSampleOK">OK</button>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="example-number-input" class="col-2 col-form-label">Check</label>
-        <div class="col-10">
-          <button class="btn btn-outline-secondary" id="btnRule1" type="button">Rule 1</button>
-          <button class="btn btn-outline-secondary" id="btnRule2">Rule 2</button>
-          <button class="btn btn-outline-secondary" id="btnRule3">Rule 3</button>
-          <button class="btn btn-outline-secondary" id="btnRule4">Rule 4</button>
-          <button class="btn btn-outline-secondary" id="btnRule5">Rule 5</button>
-          <button class="btn btn-outline-secondary" id="btnRule6">Rule 6</button>
-          <button class="btn btn-outline-secondary" id="btnRule7">Rule 7</button>
-          <button class="btn btn-outline-secondary" id="btnRule8">Rule 8</button>
-          <button class="btn btn-outline-secondary" id="btnAllRule">All rule</button>
+      <div id="frame">
+        <div class="divRule">
+          <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label"></label>
+            <div class="col-10">
+              <label for="example-text-input" id="labelSample" class="col-form-label"></label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label">List input</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="listInput">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-number-input" class="col-2 col-form-label">Upper</label>
+            <div class="col-10">
+              <input class="form-control" type="number" value="" id="upperInput">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-number-input" class="col-2 col-form-label">Lower</label>
+            <div class="col-10">
+              <input class="form-control" type="number" value="" id="lowerInput">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-number-input" class="col-2 col-form-label">Sample list input</label>
+            <div class="col-10">
+              <button class="btn btn-outline-primary active" id="btnSampleRule1" type="button">Rule 1</button>
+              <button class="btn btn-outline-primary" id="btnSampleRule2">Rule 2</button>
+              <button class="btn btn-outline-primary" id="btnSampleRule3">Rule 3</button>
+              <button class="btn btn-outline-primary" id="btnSampleRule4">Rule 4</button>
+              <button class="btn btn-outline-primary" id="btnSampleRule5">Rule 5</button>
+              <button class="btn btn-outline-primary" id="btnSampleRule6">Rule 6</button>
+              <button class="btn btn-outline-primary" id="btnSampleRule7">Rule 7</button>
+              <button class="btn btn-outline-primary" id="btnSampleRule8">Rule 8</button>
+              <button class="btn btn-outline-primary" id="btnSampleOK">OK</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-number-input" class="col-2 col-form-label">Check</label>
+            <div class="col-10">
+              <button class="btn btn-outline-secondary" id="btnRule1" type="button">Rule 1</button>
+              <button class="btn btn-outline-secondary" id="btnRule2">Rule 2</button>
+              <button class="btn btn-outline-secondary" id="btnRule3">Rule 3</button>
+              <button class="btn btn-outline-secondary" id="btnRule4">Rule 4</button>
+              <button class="btn btn-outline-secondary" id="btnRule5">Rule 5</button>
+              <button class="btn btn-outline-secondary" id="btnRule6">Rule 6</button>
+              <button class="btn btn-outline-secondary" id="btnRule7">Rule 7</button>
+              <button class="btn btn-outline-secondary" id="btnRule8">Rule 8</button>
+              <button class="btn btn-outline-secondary" id="btnAllRule">All rule</button>
+            </div>
+            <br>
+    
+          </div>
         </div>
         <br>
+        <h2 id="labelWarning"></h2>
+        <div class="divRule" id="divResult">
+          <h2 class="text-center" id="title"></h2>
+          <h5 id="description"> </h5>
+          <div class="row" style="margin-bottom:10px;">
+            <div class="col-sm-7" style="padding-top: 28px;">
+              <div class="info"></div>
+            </div>
+            <div class="col-sm-5">
+              <img id="imgRule" src="" width="70%">
+            </div>
+            </div>
+            <table id="table" class="table table-bordered">
+            </table>
+            <br>
+          <p class="pSolution" id="solution"></p>
+    
+        </div>
 
       </div>
-    </div>
-    <br>
-    <h2 id="labelWarning"></h2>
-    <div class="divRule" id="divResult">
-      <h2 class="text-center" id="title"></h2>
-      <h5 id="description"> </h5>
-      <div class="row" style="margin-bottom:10px;">
-        <div class="col-sm-7" style="padding-top: 28px;">
-          <div class="info"></div>
-        </div>
-        <div class="col-sm-5">
-          <img id="imgRule" src="" width="70%">
-        </div>
-        </div>
-        <table id="table" class="table table-bordered">
-        </table>
-        <br>
-      <p class="pSolution" id="solution"></p>
 
-    </div>
+<audio id="sound">
+  <source src="audio/beep-06.wav">
+</audio>
 
 <!-- 
     <div class="divRule">
