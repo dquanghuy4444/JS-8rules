@@ -428,7 +428,7 @@ const flagCondition = new Map([
         $('body').removeClass("warning");
         setInterVal();
 
-    },6000);
+    },12000);
   }
 
   function setInterVal()
